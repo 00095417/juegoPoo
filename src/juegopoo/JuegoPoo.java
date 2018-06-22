@@ -5,7 +5,7 @@
  */
 package juegopoo;
 
-import ventana.Ventana;
+import ventanas.Ventana;
 
 /**
  *
@@ -17,7 +17,8 @@ public class JuegoPoo {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-       new Ventana().setVisible(true);
+       Ventana juego = new Ventana();
+       juego.setVisible(true);
     }
     
 }
