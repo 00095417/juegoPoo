@@ -5,7 +5,7 @@
  */
 package ventanas;
 
-import enemigothread.EnemigoThread;
+import thread.EnemigoThread;
 import java.awt.Container;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
@@ -14,6 +14,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import thread.DisparoThread;
 
 /**
  *
@@ -21,11 +22,11 @@ import javax.swing.JLabel;
  */
 public class VentanaJuego extends JFrame implements KeyListener{
     
-    private JLabel imagen,dato, enemigo;
-    private ImageIcon img,enemi;
-    private Icon player,fantasma1;
+    private JLabel imagen,dato, enemigo, bala;
+    private ImageIcon img,enemi,bal;
+    private Icon player,fantasma1,disparo1;
     private String personaje;
-    private int step = 20,izquierda=37,arriba = 38,derecha=39,abajo=40, width = 400,heigth = 350;
+    private int step = 20,izquierda=37,arriba = 38,derecha=39,abajo=40, width = 400,heigth = 350, disparo = 65;
     private EnemigoThread enemigo1 = new EnemigoThread();
     
     private Container container = getContentPane();
@@ -52,7 +53,7 @@ public class VentanaJuego extends JFrame implements KeyListener{
         
         enemigo = new JLabel();
         enemigo.setBounds(160,100,50,50);
-        
+                
         img = new ImageIcon(getClass().getResource(personaje+".gif"));
         enemi = new ImageIcon(getClass().getResource("fantasma.gif"));
         
@@ -61,7 +62,7 @@ public class VentanaJuego extends JFrame implements KeyListener{
         
         imagen.setIcon(player);
         enemigo.setIcon(fantasma1);
-        
+                
         enemigo1.EnemigoThread(enemigo.getX(),enemigo.getY(),width-50,heigth-50,step,enemigo);
         
         container.add(dato);
@@ -90,6 +91,19 @@ public class VentanaJuego extends JFrame implements KeyListener{
         if(e.getKeyCode()==abajo)
         {
             this.imagen.setLocation(imagen.getX(), imagen.getY()+step);
+        }
+        if (e.getKeyCode()==disparo)
+        {
+            DisparoThread proyectil = new DisparoThread();
+            bala = new JLabel();
+            bala.setBounds(imagen.getX(), imagen.getY(), 20, 20);
+            bal = new ImageIcon(getClass().getResource("disparo.gif"));
+            disparo1 = new ImageIcon(bal.getImage().getScaledInstance(bala.getWidth(), bala.getHeight(), Image.SCALE_DEFAULT));
+            bala.setIcon(disparo1);
+            proyectil.DisparoThread(bala.getX(), bala.getY(), 10, bala);
+            container.add(bala);
+            proyectil.start();
+            
         }
         if (e.getKeyCode()==10)
         {
