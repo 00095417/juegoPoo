@@ -25,8 +25,8 @@ public class VentanaJuego extends JFrame implements KeyListener{
     private ImageIcon img,enemi;
     private Icon player,fantasma1;
     private String personaje;
-    private int step = 20,izquierda=37,arriba = 38,derecha=39,abajo=40;
-    EnemigoThread enemigo1 = new EnemigoThread();
+    private int step = 20,izquierda=37,arriba = 38,derecha=39,abajo=40, width = 400,heigth = 350;
+    private EnemigoThread enemigo1 = new EnemigoThread();
     
     private Container container = getContentPane();
     
@@ -35,10 +35,11 @@ public class VentanaJuego extends JFrame implements KeyListener{
         this.personaje = personaje;
         iniciarComponentes();
         setTitle("Prueba de movimientos del personaje");
-        setSize(400,350);
+        setSize(width,heigth);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.addKeyListener(this);
+        enemigo1.start();
     }
     
     public void iniciarComponentes(){
@@ -61,7 +62,7 @@ public class VentanaJuego extends JFrame implements KeyListener{
         imagen.setIcon(player);
         enemigo.setIcon(fantasma1);
         
-        enemigo1.EnemigoThread(enemigo.getX(),enemigo.getY(),350,300,step,enemigo);
+        enemigo1.EnemigoThread(enemigo.getX(),enemigo.getY(),width-50,heigth-50,step,enemigo);
         
         container.add(dato);
         container.add(imagen);
@@ -77,22 +78,18 @@ public class VentanaJuego extends JFrame implements KeyListener{
         if(e.getKeyCode()==izquierda)
         {
             this.imagen.setLocation(imagen.getX()-step, imagen.getY());
-            enemigo1.run();
         }
         if(e.getKeyCode()==arriba)
         {
             this.imagen.setLocation(imagen.getX(), imagen.getY()-step);
-            enemigo1.run();
         }
         if(e.getKeyCode()==derecha)
         {
             this.imagen.setLocation(imagen.getX()+step, imagen.getY());
-            enemigo1.run();
         }
         if(e.getKeyCode()==abajo)
         {
             this.imagen.setLocation(imagen.getX(), imagen.getY()+step);
-            enemigo1.run();
         }
         if (e.getKeyCode()==10)
         {

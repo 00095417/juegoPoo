@@ -31,38 +31,70 @@ public class EnemigoThread extends Thread{
     @Override
     public void run() {
         
+        while(true){
         switch(getNumRandom(1,8))
         {
             case 1:
-                this.enemigo.setLocation(x, y-=step);
+                if (estaEnVentana(x,y-step)){
+                    this.enemigo.setLocation(x, y);
+                }
                 break;
             case 2:
-                this.enemigo.setLocation(x+=step,y-=step);
+                if (estaEnVentana(x+step,y-step)){
+                    this.enemigo.setLocation(x,y);
+                }
                 break;
             case 3:
-                this.enemigo.setLocation(x+=step, y);
+                if (estaEnVentana(x+step, y)){
+                    this.enemigo.setLocation(x, y);
+                }
                 break;
             case 4:
-                this.enemigo.setLocation(x+=step, y+=step);
+                if (estaEnVentana(x+step, y+step)){
+                    this.enemigo.setLocation(x, y);
+                }
                 break;
             case 5:
-                this.enemigo.setLocation(x, y+=step);
+                if (estaEnVentana(x, y+step)){
+                    this.enemigo.setLocation(x, y);
+                }
                 break;
             case 6:
-                this.enemigo.setLocation(x-=step, y+=step);
+                this.enemigo.setLocation(x-step, y+step);
                 break;
             case 7:
-                this.enemigo.setLocation(x-=step, y);
+                if (estaEnVentana(x-step, y)){
+                    this.enemigo.setLocation(x,y);
+                }
                 break;
             case 8:
-                this.enemigo.setLocation(x-=step, y-=step);
+                if (estaEnVentana(x-step, y-step)){
+                    this.enemigo.setLocation(x,y);
+                }
                 break;
         }
-        yield();
+        try {
+                sleep(500);
+            }catch (InterruptedException e){
+                e.printStackTrace();
+            }
+        }
     }
-       
+    
     private int getNumRandom(int min,int max){
         return ThreadLocalRandom.current().nextInt(min, max);
     }
     
+    public boolean estaEnVentana(int stepX,int stepY){
+        if (stepX>0&&stepX<this.limitex&&stepY>0&&stepY<this.limitey)
+        {
+            x = stepX;
+            y = stepY;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }    
 }

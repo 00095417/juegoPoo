@@ -38,7 +38,7 @@ public class Ventana extends JFrame {
     
     private void iniciarComponentes(){
         
-        seleccionar = new JButton("Cambiar");
+        seleccionar = new JButton("Mostrar");
         seleccionar.setBounds(20, 20, 100, 25);
         
         jugar = new JButton("Jugar");
@@ -59,7 +59,7 @@ public class Ventana extends JFrame {
         container.add(seleccionar);
         container.add(jugar);
         container.add(animacion);
-        container.add(imagen);    
+        container.add(imagen);
     }
     
     public void eventos(){
