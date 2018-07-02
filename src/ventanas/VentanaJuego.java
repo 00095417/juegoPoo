@@ -15,6 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import thread.DisparoThread;
+import thread.PanelThread;
 
 /**
  *
@@ -28,6 +29,7 @@ public class VentanaJuego extends JFrame implements KeyListener{
     private String personaje;
     private int step = 20,izquierda=37,arriba = 38,derecha=39,abajo=40, width = 400,heigth = 350, disparo = 65;
     private EnemigoThread enemigo1 = new EnemigoThread();
+    private PanelThread panel = new PanelThread();
     
     private Container container = getContentPane();
     
@@ -41,6 +43,7 @@ public class VentanaJuego extends JFrame implements KeyListener{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.addKeyListener(this);
         enemigo1.start();
+        panel.start();;
     }
     
     public void iniciarComponentes(){
@@ -68,6 +71,7 @@ public class VentanaJuego extends JFrame implements KeyListener{
         container.add(dato);
         container.add(imagen);
         container.add(enemigo);        
+        panel.PanelThread(container);
     }
 
     @Override
@@ -102,6 +106,7 @@ public class VentanaJuego extends JFrame implements KeyListener{
             bala.setIcon(disparo1);
             proyectil.DisparoThread(bala.getX(), bala.getY(), 10, bala);
             container.add(bala);
+            panel.PanelThread(container);
             proyectil.start();
             
         }

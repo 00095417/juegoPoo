@@ -51,6 +51,7 @@ public class Ventana extends JFrame {
         animacion.addItem("murcielago");
         animacion.addItem("tortuga");
         animacion.addItem("fantasma");
+        animacion.addItem("MC");
         
         imagen = new JLabel();
         imagen.setIcon(new ImageIcon(getClass().getResource(animacion.getSelectedItem().toString()+".gif")));

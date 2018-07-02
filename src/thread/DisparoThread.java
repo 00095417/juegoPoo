@@ -5,6 +5,8 @@
  */
 package thread;
 
+import java.applet.Applet;
+import java.applet.AudioClip;
 import javax.swing.JLabel;
 
 /**
@@ -28,6 +30,7 @@ public class DisparoThread extends Thread{
 
     @Override
     public void run() {
+        Sonido();
         while (true){
             this.disparo.setLocation(x+=step, y);
             try {
@@ -36,6 +39,12 @@ public class DisparoThread extends Thread{
                 e.printStackTrace();
             }
         }
-    }   
+    }
+    
+    public void Sonido(){
+        AudioClip audio;
+        audio = Applet.newAudioClip(getClass().getResource("disparo.wav"));
+        audio.play();
+    }
     
 }
