@@ -7,6 +7,7 @@ package thread;
 
 import java.applet.Applet;
 import java.applet.AudioClip;
+import java.awt.Container;
 import javax.swing.JLabel;
 
 /**
@@ -17,24 +18,30 @@ public class DisparoThread extends Thread{
     
     private int x, y, step;
     private JLabel disparo;
+    private Container container;
 
     public DisparoThread() {
     }
 
-    public void DisparoThread(int x, int y, int step, JLabel disparo) {
+    public void DisparoThread(int x, int y, int step, JLabel disparo, Container container) {
         this.x = x;
         this.y = y;
         this.step = step;
         this.disparo = disparo;
+        this.container = container;
     }
 
     @Override
     public void run() {
         Sonido();
         while (true){
-            this.disparo.setLocation(x+=step, y);
             try {
-                sleep(250);
+                this.disparo.setLocation(x+=step, y);
+                if (this.disparo.getX()>400){
+                    container.remove(disparo);
+                    
+                }
+                sleep(150);
             }catch (InterruptedException e){
                 e.printStackTrace();
             }
